@@ -491,7 +491,7 @@ namespace Mi8iOS.Setup
                 Application.SetCompatibleTextRenderingDefault(false);
                 var r = MessageBox.Show("确定要卸载 " + Util.AppName + " 吗？\n\n" +
                                         "安装目录将被删除：" + dir + "\n\n" +
-                                        "注意：不会删除工作目录里的 IPSW、镜像和编译产物（E:\\mi8-ios 等），" +
+                                        "注意：不会删除工作目录里的 IPSW、镜像和编译产物（D:\\mi8-ios 等），" +
                                         "如需一并清掉请手动删除。",
                                         "卸载", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (r != DialogResult.Yes) return 0;

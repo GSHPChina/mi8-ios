@@ -17,7 +17,7 @@
 
 ```powershell
 # 0) 打开 PowerShell（普通权限即可；装 WSL 时会弹一次 UAC）
-cd "C:\Users\GSHP\Documents\默认项目"
+cd "D:\work\mi8-ios"
 
 # 1) 体检：看看这台机器缺什么
 .\mi8-ios.ps1 doctor
@@ -91,7 +91,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 
 | 参数 | 说明 |
 |---|---|
-| `-Work D:\mi8-ios` | 指定工作目录。默认自动挑剩余空间 ≥ 60GB 的盘（本机解析为 `E:\mi8-ios`） |
+| `-Work D:\mi8-ios` | 指定工作目录。默认自动挑剩余空间 ≥ 60GB 的盘（例如 `D:\mi8-ios`） |
 | `-BootImg C:\path\boot.img` | 指定原厂 boot.img，`build` 会复制到 `phone\boot.img` |
 | `-Yes` | 跳过二次确认（`flash` / `backup` 仍会要求输入 `YES`） |
 
@@ -100,7 +100,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 ## 工作目录结构
 
 ```
-E:\mi8-ios\
+D:\mi8-ios\
 ├── lib\          由 dump/setup 生成的 bash 脚本（setup / ipsw / rootfs / kernel / demo / build）
 ├── repo\         ios-fajita 源码
 ├── hakios\       hackios-xnu-kernel（demo 用）
@@ -136,7 +136,7 @@ E:\mi8-ios\
 1. **解锁 Bootloader**：小米官方解锁要登录账号、绑定设备，**等待 168 小时（7 天）**。不解 BL 无法 fastboot 刷任何东西。
 2. **原厂 `boot.img`**：`build` 步骤必须要有它（用来抽 DTB 和核对显存基址）。两种来源：
    - 跑 `.\mi8-ios.ps1 backup`，让工具用 `fastboot fetch` 从手机拉；
-   - 从对应版本的 MIUI 卡刷包 / 线刷包里解出 `boot.img`，放进 `E:\mi8-ios\phone\boot.img`，或用 `-BootImg` 指定。
+   - 从对应版本的 MIUI 卡刷包 / 线刷包里解出 `boot.img`，放进 `D:\mi8-ios\phone\boot.img`，或用 `-BootImg` 指定。
 
 ### 必须手动备份的分区（不在 fastboot 里）
 
@@ -165,7 +165,7 @@ E:\mi8-ios\
 
 | 项 | 为什么 | 怎么查 |
 |---|---|---|
-| `FB_BASE` / `FB_BLOCK` / `FB_OFFSET` | ABL 留下的显存基址，一加和小米不一样 | 先用默认值试；不亮屏就在 `E:\mi8-ios\dtb\dipper.dts` 里搜 `reserved-memory` |
+| `FB_BASE` / `FB_BLOCK` / `FB_OFFSET` | ABL 留下的显存基址，一加和小米不一样 | 先用默认值试；不亮屏就在 `D:\mi8-ios\dtb\dipper.dts` 里搜 `reserved-memory` |
 | `TOUCH_*` | 一加6T 是 Synaptics RMI4，小米8 可能是另一颗触摸 IC | 在 `dipper.dts` 里搜 `i2c` 节点和 `compatible` |
 | `DTB_DEFAULT` | 抽出的 dtb 可能有多个 | 看 `build` 输出里"使用: ..."那一行 |
 
@@ -223,7 +223,7 @@ fork 完 GitHub 需要几秒钟注册 workflow，脚本会重试 12 次。还不
 
 ## 本机体检实测结论（2026-10-26）
 
-- 磁盘：C 剩 44GB、D 149GB、**E 187GB**（工具自动选中，工作目录 `E:\mi8-ios`）
+- 磁盘：任选一块剩余 ≥ 60GB 的盘即可（工具自动挑最大的那块，示例工作目录 `D:\mi8-ios`）
 - 已装：Python 3.12、winget 1.29
 - 未装：git、7z、qemu、fastboot/adb、WSL 发行版（`setup` 会装）
 - 网络：见上文表格
