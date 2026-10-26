@@ -1,0 +1,16 @@
+# 二进制不要做任何行尾转换
+*.exe  binary
+*.ico  binary
+*.png  binary
+*.jpg  binary
+*.zip  binary
+*.7z   binary
+*.img  binary
+
+# PowerShell 脚本必须带 UTF-8 BOM，行尾统一 CRLF（PowerShell 5.1 在中文 Windows 最稳）
+*.ps1  text eol=crlf
+
+# 仓库内文档统一 LF，避免 Windows/Linux 下 diff 噪音
+*.md   text eol=lf
+*.cs   text eol=lf
+*.gitignore text eol=lf

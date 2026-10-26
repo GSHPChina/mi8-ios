@@ -1,0 +1,27 @@
+# 运行期产物（日志、配置、临时）
+logs/
+dist/Mi8iOS/logs/
+dist/Mi8iOS/config.ini
+*.log
+config.ini
+
+# 编译中间产物（build.ps1 每次都会重新生成）
+src/iconforge.exe
+src/iconforge.pdb
+src/*.pdb
+*.exe~
+*.tmp
+
+# 编辑器 / 系统
+.vs/
+.vscode/
+*.user
+*.suo
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 本地调试残留
+probe*.txt
+__pycache__/
+*.pyc
