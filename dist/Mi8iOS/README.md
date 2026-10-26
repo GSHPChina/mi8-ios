@@ -227,3 +227,9 @@ fork 完 GitHub 需要几秒钟注册 workflow，脚本会重试 12 次。还不
 - 已装：Python 3.12、winget 1.29
 - 未装：git、7z、qemu、fastboot/adb、WSL 发行版（`setup` 会装）
 - 网络：见上文表格
+
+---
+
+## 许可证
+
+[MIT](LICENSE) © 2026 GSHPChina —— 可自由使用、修改、分发，保留版权声明即可。
